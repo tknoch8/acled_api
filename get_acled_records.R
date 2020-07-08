@@ -46,12 +46,17 @@ get_acled_dat <- function(.country = NULL, .year = NULL) {
   
   dat <- content_list$data
   
-  # returns all classes as character class
-  dat %>% 
+  dat
+}
+
+
+clean_acled_cols <- function(.x) {
+  .x %>% 
     mutate(date = lubridate::ymd(event_date)) %>% 
     mutate(year = as.integer(year)) %>% 
     mutate_at(vars(event_type:assoc_actor_2, 
-                   region, country, 
+                   region, 
+                   country, 
                    admin1:location, 
                    geo_precision,
                    iso3,
@@ -63,3 +68,12 @@ get_acled_dat <- function(.country = NULL, .year = NULL) {
                    fatalities), 
               ~as.double(.))
 }
+
+
+
+
+
+
+
+
+
